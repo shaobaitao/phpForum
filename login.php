@@ -1,4 +1,6 @@
 <?php
+
+
 require 'component/MysqlConnection.php';
 header('Content-Type:text/json;charset=utf-8');
 $data = file_get_contents("php://input");
