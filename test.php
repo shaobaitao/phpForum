@@ -2,7 +2,7 @@
 
 $info = getUserInfo();
 setCookies($info);
-
+checkInfo($info);
 
 
 function setCookies($info){
@@ -32,8 +32,6 @@ function getUserInfo(){
     return $info;
 }
 function checkInfo($info){
-    $info['username']=mysql_real_escape_string()
-
     $str = array
     (
         'code'=> '',
@@ -64,6 +62,8 @@ function checkInfo($info){
         $str['msg']="验证通过";
     }
 
-
-
+    if($str['code']!=200){
+        echo json_encode($str, 256);
+        exit();
+    }
 }

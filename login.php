@@ -1,8 +1,8 @@
 <?php
-
-
 require 'component/MysqlConnection.php';
 header('Content-Type:text/json;charset=utf-8');
+
+$conn=new Connection();
 $data = file_get_contents("php://input");
 $data = json_decode($data, true);
 
