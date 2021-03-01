@@ -10,6 +10,7 @@ $username = trim($data['name']);
 $password = trim($data['pass']);
 
 $sql = "select * from forum.forum_user where username='$username' and password='$password'";
+
 if (isset($conn)) {
     $result = mysqli_query($conn, $sql);
 }
