@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if(isset($_SESSION['userInfo'])){
-    $msg=$_SESSION['userInfo'];
+if(isset($_SESSION['username'])){
+    $msg=$_SESSION['username'];
     $is_login=true;
 }else{
-    $msg='论坛';
+    $msg='no sessions';
     $is_login=false;
 }
 

@@ -2,7 +2,7 @@
 require 'component/MysqlConnection.php';
 header('Content-Type:text/json;charset=utf-8');
 
-$conn=new Connection();
+$conn = new Connection();
 $data = file_get_contents("php://input");
 $data = json_decode($data, true);
 
@@ -27,7 +27,7 @@ if ($row == null) {
 }
 $str = array
 (
-    'code'=> $code,
+    'code' => $code,
     'msg' => $msg,
 );
 echo json_encode($str, 256);
