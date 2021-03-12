@@ -15,6 +15,7 @@ function setSessions($info)
 {
     session_start();
     $_SESSION['username'] = $info['username'];
+
 }
 
 function setCookies($info)
@@ -64,8 +65,6 @@ function checkLoginInfo($info)
     } elseif (strlen($info['password']) != 32) {
         statusCode(411, "密码长度不符合要求");
         exit();
-    } else {
-        statusCode(200, "验证通过");
     }
 }
 
@@ -157,8 +156,6 @@ function checkRegisterInfo($info)
     } elseif (!preg_match('/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/', $info['email'])) {
         statusCode(420, "邮箱格式不符合要求");
         exit();
-    } else {
-        statusCode(200, "验证通过");
     }
 }
 
@@ -174,6 +171,9 @@ function register($info)
     } else {
         statusCode(450, '注册失败');
     }
+
+//    $sql = "INSERT INTO forum.forum_userInfo VALUES (null, ? , null , null ,null, null ,null,null,null);";
+
 }
 
 function statusCode($code, $msg)
@@ -184,4 +184,15 @@ function statusCode($code, $msg)
         'msg' => $msg,
     );
     echo json_encode($str, 256);
+}
+
+function getUsername($id){
+    $conn = new Connection();
+    $sql = "select username from forum.forum_user where id= ? ";
+    $stmt = $conn->mysqli->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['username'];
 }
