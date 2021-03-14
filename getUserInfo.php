@@ -22,13 +22,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$info['location']=$row['location'];
-$info['nickname']=$row['nickname'];
-$info['gender']=$row['gender'];
-$info['email']=$row['email'];
-$info['headPortrait']=$row['headPortrait'];
-$info['birthday']=$row['birthday'];
-$info['introduction']=$row['introduction'];
+
+$info['location']=$row['location']?$row['location']:'未填写';
+$info['nickname']=$row['nickname']?$row['nickname']:'未填写';
+$info['gender']=$row['gender']?$row['gender']:'未填写';
+$info['email']=$row['email']?$row['email']:'未填写';
+$info['headPortrait']=$row['headPortrait']?$row['headPortrait']:'未填写';
+$info['birthday']=$row['birthday']?$row['birthday']:'未填写';
+$info['introduction']=$row['introduction']?$row['introduction']:'未填写';
 
 
 
