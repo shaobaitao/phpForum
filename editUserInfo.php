@@ -7,7 +7,7 @@ $data = file_get_contents("php://input");
 $data = json_decode($data, true);
 $data = $data['editInfo'];
 session_start();
-if (!getUsername($data['userID']) === $_SESSION['username'] || $_SESSION['username'] == null) {
+if ($_SESSION['username'] == null || !getUsername($data['userID']) === $_SESSION['username']) {
     statusCode(500, '拒绝访问');
     exit();
 }

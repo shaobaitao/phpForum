@@ -162,6 +162,7 @@ function checkRegisterInfo($info)
 function register($info)
 {
     $conn = new Connection();
+
     $sql = "INSERT INTO forum.forum_user VALUES (null, ? , ? , ? ,null, ? ,0,1,0);";
     $stmt = $conn->mysqli->prepare($sql);
     $now = date('Y-m-d H:i:s', time());
@@ -173,6 +174,14 @@ function register($info)
     }
 
 //    $sql = "INSERT INTO forum.forum_userInfo VALUES (null, ? , null , null ,null, null ,null,null,null);";
+    $userID=getID($info['username']);
+
+
+    $avatar='http://forum.shaobaitao.cn/avatar/nut.png';
+    $sql = "insert into forum.forum_userInfo values ( null , ? , null , null , null , null , ? , null , null ) ";
+    $stmt = $conn->mysqli->prepare($sql);
+    $stmt->bind_param("is", $userID,$avatar);
+    $stmt->execute();
 
 }
 
@@ -195,4 +204,14 @@ function getUsername($id){
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     return $row['username'];
+}
+function getID($name){
+    $conn = new Connection();
+    $sql = "select id from forum.forum_user where username= ? ";
+    $stmt = $conn->mysqli->prepare($sql);
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['id'];
 }
