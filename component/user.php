@@ -215,3 +215,12 @@ function getID($name){
     $row = $result->fetch_assoc();
     return $row['id'];
 }
+
+function uploadAvatar($id,$url){
+    $conn = new Connection();
+    $sql = "UPDATE forum.forum_userInfo SET headPortrait = ?  where userID = ? ";
+    $stmt = $conn->mysqli->prepare($sql);
+    $stmt->bind_param("si", $url,$id);
+    $stmt->execute();
+    echo 11111;
+}
